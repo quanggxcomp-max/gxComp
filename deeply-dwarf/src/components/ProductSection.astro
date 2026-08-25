@@ -18,16 +18,21 @@ interface Props {
   showViewMore?: boolean;
   viewMoreUrl?: string;
   id?: string;
+  limit?: number;
+  allProducts?: Product[];
 }
 
-const { title, products, showViewMore = false, viewMoreUrl = '#', id } = Astro.props;
+const { title, products, showViewMore = false, viewMoreUrl = '#', id, limit = 20, allProducts } = Astro.props;
+const displayedProducts = products.slice(0, limit);
+const hasMore = allProducts ? allProducts.length > limit : products.length > limit;
+const totalProducts = allProducts ? allProducts.length : products.length;
 ---
 
 <section class="product-section" id={id}>
   <h2 class="section-title">{title}</h2>
 
-  <div class="product-grid">
-    {products.map((product) => (
+  <div class="product-grid" data-section-id={id} data-all-products={JSON.stringify(allProducts || products)} data-current-limit={limit}>
+    {displayedProducts.map((product) => (
       <ProductCard
         name={product.name}
         code={product.code}
@@ -41,11 +46,79 @@ const { title, products, showViewMore = false, viewMoreUrl = '#', id } = Astro.p
     ))}
   </div>
 
-  {showViewMore && (
+  {showViewMore && hasMore && (
     <div class="view-more">
-      <a href={viewMoreUrl}>
+      <button class="view-more-btn" data-current-limit={limit} data-total={totalProducts} data-view-more-url={viewMoreUrl}>
         Xem thêm ▼
-      </a>
+      </button>
     </div>
   )}
 </section>
+
+<style>
+  .view-more-btn {
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: opacity 0.15s;
+  }
+
+  .view-more-btn:hover {
+    opacity: 0.8;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.view-more-btn').forEach(btn => {
+    btn.addEventListener('click', function(this: HTMLButtonElement) {
+      const currentLimit = parseInt(this.dataset.currentLimit || '20');
+      const total = parseInt(this.dataset.total || '0');
+      const viewMoreUrl = this.dataset.viewMoreUrl;
+      const productGrid = this.closest('.product-section')?.querySelector('.product-grid');
+
+      // If there's a viewMoreUrl, navigate to it
+      if (viewMoreUrl && viewMoreUrl !== '#') {
+        window.location.href = viewMoreUrl;
+        return;
+      }
+
+      // Load more products inline
+      if (productGrid) {
+        const allProducts = JSON.parse(productGrid.dataset.allProducts || '[]');
+        const newLimit = currentLimit + 20;
+        const productsToShow = allProducts.slice(0, newLimit);
+
+        // Clear and re-render products
+        productGrid.innerHTML = productsToShow.map(product => `
+          <div class="product-card">
+            <a href="/san-pham/${product.slug}" class="product-card__link">
+              ${product.discount ? `<span class="badge-sale">-${product.discount}%</span>` : ''}
+              <div class="product-card__image">
+                <img src="${product.image}" alt="${product.name}" loading="lazy" />
+              </div>
+              <div class="product-card__info">
+                <p class="product-card__name">${product.name}</p>
+                <p class="product-card__code">Mã SP: ${product.code}</p>
+                <p class="product-card__price">${product.price}</p>
+                ${product.originalPrice ? `<p class="product-card__original">${product.originalPrice}</p>` : ''}
+              </div>
+            </a>
+          </div>
+        `).join('');
+
+        // Update current limit
+        productGrid.dataset.currentLimit = newLimit.toString();
+        this.dataset.currentLimit = newLimit.toString();
+
+        // Hide button if no more products
+        if (newLimit >= total) {
+          this.style.display = 'none';
+        }
+      }
+    });
+  });
+</script>

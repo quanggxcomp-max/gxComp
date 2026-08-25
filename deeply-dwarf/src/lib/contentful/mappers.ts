@@ -1,5 +1,5 @@
 import type { Entry, EntrySkeletonType } from 'contentful';
-import type { CategoryPageData, ProductCardData } from './types';
+import type { CategoryPageData, ProductCardData, SalesConsultantData } from './types';
 
 type CategoryFields = {
   label: string;
@@ -22,6 +22,12 @@ type ProductFields = {
   isNew?: boolean;
   isSale?: boolean;
   category?: Entry<EntrySkeletonType & { fields: CategoryFields }>;
+};
+
+type SalesConsultantFields = {
+  name: string;
+  phone: string;
+  order?: number;
 };
 
 export function formatPrice(price: string): string {
@@ -73,5 +79,17 @@ export function mapCategoryPageData(
     description: fields.description ?? '',
     subcategories: fields.subcategories ?? [],
     products,
+  };
+}
+
+export function mapSalesConsultantEntry(
+  entry: Entry<EntrySkeletonType & { fields: SalesConsultantFields }>
+): SalesConsultantData {
+  const fields = entry.fields;
+
+  return {
+    name: fields.name,
+    phone: fields.phone,
+    order: fields.order,
   };
 }

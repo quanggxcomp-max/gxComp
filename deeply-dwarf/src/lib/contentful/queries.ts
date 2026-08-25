@@ -1,7 +1,7 @@
 import type { Entry, EntrySkeletonType } from 'contentful';
 import { getContentfulClient, getContentfulLocale } from './client';
-import { mapCategoryPageData, mapProductEntry } from './mappers';
-import type { CategoryNavItem, CategoryPageData, ProductCardData } from './types';
+import { mapCategoryPageData, mapProductEntry, mapSalesConsultantEntry } from './mappers';
+import type { CategoryNavItem, CategoryPageData, ProductCardData, SalesConsultantData } from './types';
 
 type CategoryFields = {
   label: string;
@@ -24,6 +24,12 @@ type ProductFields = {
   isNew?: boolean;
   isSale?: boolean;
   category?: Entry<EntrySkeletonType & { fields: CategoryFields }>;
+};
+
+type SalesConsultantFields = {
+  name: string;
+  phone: string;
+  order?: number;
 };
 
 const PRODUCT_SELECT = [
@@ -134,4 +140,16 @@ export async function getCategoriesWithProducts(): Promise<CategoryPageData[]> {
 
 export async function getAllProductsForPages(): Promise<ProductCardData[]> {
   return fetchAllProducts();
+}
+
+export async function getSalesConsultants(): Promise<SalesConsultantData[]> {
+  const client = getContentfulClient();
+  const locale = await getContentfulLocale();
+  const response = await client.getEntries<EntrySkeletonType & { fields: SalesConsultantFields }>({
+    content_type: 'salesConsultant',
+    locale,
+    order: ['fields.order', 'sys.createdAt'],
+  });
+
+  return response.items.map((entry) => mapSalesConsultantEntry(entry));
 }

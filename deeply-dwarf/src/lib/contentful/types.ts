@@ -28,3 +28,9 @@ export type CategoryPageData = {
   subcategories: string[];
   products: ProductCardData[];
 };
+
+export type SalesConsultantData = {
+  name: string;
+  phone: string;
+  order?: number;
+};

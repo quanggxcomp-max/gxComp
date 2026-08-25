@@ -5,9 +5,11 @@ import Header from '../components/Header.astro';
 import NavBar from '../components/NavBar.astro';
 import SalesConsultant from '../components/SalesConsultant.astro';
 import Footer from '../components/Footer.astro';
+import ContactSupport from '../components/ContactSupport.astro';
+import { site } from '../lib/site';
 ---
 
-<Layout title="Sơ đồ đường đi - Siêu Thị Viễn Thông">
+<Layout title="Sơ đồ đường đi - Gx công nghệ">
   <TopBar />
   <Header />
   <NavBar />
@@ -34,16 +36,15 @@ import Footer from '../components/Footer.astro';
                 </svg>
               </div>
               <div class="address-box__content">
-                <h2 class="address-box__name">Siêu Thị Viễn Thông – Công ty CP Viễn Thông Á Châu</h2>
                 <p class="address-box__addr">92K Nguyễn Thái Sơn, Phường Hạnh Thông, Quận Gò Vấp, TP.HCM</p>
                 <div class="address-box__contacts">
                   <span>
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
-                    <a href="tel:02873001535">(028) 7300 1535</a>
+                    <a href={`tel:${site.sales.tel}`}>{site.sales.display}</a>
                   </span>
                   <span>
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                    <a href="mailto:info@sieuthivienthong.com">info@sieuthivienthong.com</a>
+                    <a href="mailto:info@Gxcompany.com">info@Gxcompany.com</a>
                   </span>
                 </div>
               </div>
@@ -59,7 +60,7 @@ import Footer from '../components/Footer.astro';
                 allowfullscreen
                 loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"
-                title="Bản đồ vị trí Siêu Thị Viễn Thông"
+                title="Bản đồ vị trí Gx công nghệ"
               ></iframe>
             </div>
 
@@ -113,24 +114,7 @@ import Footer from '../components/Footer.astro';
 
         <aside class="page-sidebar">
           <SalesConsultant />
-
-          <div class="contact-widget">
-            <div class="contact-widget__header">LIÊN HỆ VÀ HỖ TRỢ</div>
-            <div class="contact-widget__item">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
-              <div>
-                <p class="contact-label">Liên hệ mua hàng</p>
-                <a href="tel:02873001535">(028) 7300 1535</a>
-              </div>
-            </div>
-            <div class="contact-widget__item">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
-              <div>
-                <p class="contact-label">Hỗ trợ bảo hành</p>
-                <a href="tel:02873002049">(028) 7300 2049</a>
-              </div>
-            </div>
-          </div>
+          <ContactSupport />
         </aside>
 
       </div>

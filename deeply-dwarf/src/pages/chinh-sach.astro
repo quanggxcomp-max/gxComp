@@ -3,10 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import TopBar from '../components/TopBar.astro';
 import Header from '../components/Header.astro';
 import NavBar from '../components/NavBar.astro';
+import SalesConsultant from '../components/SalesConsultant.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="Chính sách - Siêu Thị Viễn Thông">
+<Layout title="Chính sách - Gx công nghệ">
   <TopBar />
   <Header />
   <NavBar />
@@ -19,7 +20,9 @@ import Footer from '../components/Footer.astro';
         <span>Chính sách</span>
       </nav>
 
-      <div class="page-card">
+      <div class="page-layout">
+        <div class="page-main">
+          <div class="page-card">
         <h1 class="page-title">Chính sách</h1>
 
         <!-- Section 1 -->
@@ -28,7 +31,7 @@ import Footer from '../components/Footer.astro';
             <span class="policy-num">1</span>
             Chính sách bán hàng
           </h2>
-          <p>Siêu Thị Viễn Thông cam kết cung cấp 100% sản phẩm chính hãng, hàng mới nguyên hộp, có đầy đủ giấy tờ xuất xứ và tem bảo hành của nhà sản xuất.</p>
+          <p>Gx công nghệ cam kết cung cấp 100% sản phẩm chính hãng, hàng mới nguyên hộp, có đầy đủ giấy tờ xuất xứ và tem bảo hành của nhà sản xuất.</p>
           <p>Giá niêm yết trên website là giá cuối cùng đã bao gồm VAT 10%. Chúng tôi không thu thêm bất kỳ phụ phí nào ngoài phí vận chuyển (nếu có).</p>
           <p>Khách hàng mua số lượng lớn (từ 10 sản phẩm cùng loại trở lên) được hưởng chính sách giá đặc biệt. Vui lòng liên hệ hotline (028) 7300 1535 để được báo giá.</p>
           <p>Hóa đơn VAT được xuất theo yêu cầu trong vòng 24 giờ kể từ khi hoàn tất giao dịch.</p>
@@ -157,6 +160,13 @@ import Footer from '../components/Footer.astro';
           <p>Nội dung chuyển khoản: <strong>[Mã đơn hàng] – [Họ tên]</strong>. Sau khi chuyển khoản, vui lòng gửi ảnh chụp màn hình xác nhận qua Zalo hoặc email để chúng tôi xử lý đơn hàng nhanh nhất.</p>
         </div>
 
+          </div>
+        </div>
+
+        <aside class="page-sidebar">
+          <SalesConsultant />
+        </aside>
+
       </div>
     </div>
   </main>
@@ -171,6 +181,10 @@ import Footer from '../components/Footer.astro';
   .breadcrumb a { color: var(--color-primary); text-decoration: none; }
   .breadcrumb a:hover { text-decoration: underline; }
   .breadcrumb span { color: var(--color-primary); font-weight: 500; }
+
+  .page-layout { display: flex; gap: 16px; align-items: flex-start; }
+  .page-main { flex: 1; min-width: 0; }
+  .page-sidebar { flex-shrink: 0; width: 240px; display: flex; flex-direction: column; gap: 14px; position: sticky; top: 50px; }
 
   .page-card { background: white; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 28px; }
   .page-title { font-size: 1.4rem; font-weight: 700; color: var(--color-text); border-left: 4px solid var(--color-red); padding-left: 12px; margin-bottom: 24px; }
@@ -203,5 +217,7 @@ import Footer from '../components/Footer.astro';
     .bank-info-list { grid-template-columns: 1fr; }
     .policy-table-row { grid-template-columns: 1fr; gap: 2px; }
     .policy-table-header { display: none; }
+    .page-layout { flex-direction: column; }
+    .page-sidebar { width: 100%; position: static; }
   }
 </style>

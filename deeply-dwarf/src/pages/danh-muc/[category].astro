@@ -8,6 +8,7 @@ import Footer from '../../components/Footer.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import { getCategoriesWithProducts } from '../../lib/contentful/queries';
 import type { CategoryPageData } from '../../lib/contentful/types';
+import ProductSection from '../../components/ProductSection.astro';
 
 export async function getStaticPaths() {
   const categories = await getCategoriesWithProducts();
@@ -26,7 +27,7 @@ const { category } = Astro.params;
 const { categoryData } = Astro.props;
 ---
 
-<Layout title={categoryData.label + ' - Siêu Thị Viễn Thông'}>
+<Layout title={categoryData.label + ' - Gx công nghệ'}>
   <TopBar />
   <Header />
   <NavBar />
@@ -89,21 +90,13 @@ const { categoryData } = Astro.props;
 
           <!-- Products or empty state -->
           {categoryData.products.length > 0 ? (
-            <div class="category-products">
-              <div class="product-grid product-grid--4col">
-                {categoryData.products.map(p => (
-                  <ProductCard
-                    slug={p.slug}
-                    name={p.name}
-                    code={p.code}
-                    price={p.price}
-                    originalPrice={p.originalPrice}
-                    discount={p.discount}
-                    image={p.image}
-                  />
-                ))}
-              </div>
-            </div>
+            <ProductSection
+              title={categoryData.label}
+              products={categoryData.products}
+              allProducts={categoryData.products}
+              showViewMore={true}
+              viewMoreUrl="#"
+            />
           ) : (
             <div class="empty-category">
               <svg viewBox="0 0 64 64" width="64" height="64" fill="currentColor">

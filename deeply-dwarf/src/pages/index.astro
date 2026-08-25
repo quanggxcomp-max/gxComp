@@ -10,17 +10,19 @@ import Footer from '../components/Footer.astro';
 import {
   getCategoryNavItems,
   getProductsByFlag,
+  getAllProductsForPages,
 } from '../lib/contentful/queries';
 
-const [bestsellerProducts, newProducts, saleProducts, categories] = await Promise.all([
+const [bestsellerProducts, newProducts, saleProducts, categories, allProducts] = await Promise.all([
   getProductsByFlag('isBestseller'),
   getProductsByFlag('isNew'),
   getProductsByFlag('isSale'),
   getCategoryNavItems(),
+  getAllProductsForPages(),
 ]);
 ---
 
-<Layout title="Siêu Thị Viễn Thông - Camera, Mạng, Access Control - Giá Gốc">
+<Layout title="Gx công nghệ - Camera, Mạng, Access Control - Giá Gốc">
   <TopBar />
   <Header />
   <NavBar />
@@ -36,24 +38,27 @@ const [bestsellerProducts, newProducts, saleProducts, categories] = await Promis
             id="san-pham-ban-chay"
             title="Sản phẩm bán chạy"
             products={bestsellerProducts}
+            allProducts={allProducts.filter(p => p.isBestseller)}
             showViewMore={true}
-            viewMoreUrl="/san-pham-ban-chay"
+            viewMoreUrl="#"
           />
 
           <ProductSection
             id="san-pham-moi"
             title="Sản phẩm mới"
             products={newProducts}
+            allProducts={allProducts.filter(p => p.isNew)}
             showViewMore={true}
-            viewMoreUrl="/san-pham-moi"
+            viewMoreUrl="#"
           />
 
           <ProductSection
             id="khuyen-mai"
             title="🔥 Sản phẩm khuyến mãi"
             products={saleProducts}
+            allProducts={allProducts.filter(p => p.isSale)}
             showViewMore={true}
-            viewMoreUrl="/khuyen-mai"
+            viewMoreUrl="#"
           />
         </div>
 

@@ -8,6 +8,7 @@ import Footer from '../../components/Footer.astro';
 import { getAllProductsForPages } from '../../lib/contentful/queries';
 import { productPlaceholderImage } from '../../lib/contentful/mappers';
 import type { ProductCardData } from '../../lib/contentful/types';
+import { site } from '../../lib/site';
 
 export async function getStaticPaths() {
   const allProducts = await getAllProductsForPages();
@@ -35,7 +36,7 @@ const related = allProducts
   .slice(0, 4);
 ---
 
-<Layout title={product.name + ' - Siêu Thị Viễn Thông'}>
+<Layout title={product.name + ' - Gx công nghệ'}>
   <TopBar />
   <Header />
   <NavBar />
@@ -159,7 +160,7 @@ const related = allProducts
             </div>
             <div class="faq-item">
               <h3 class="faq-question">Có thể đổi trả sản phẩm không?</h3>
-              <p class="faq-answer">Có, sản phẩm được đổi trả trong vòng 7 ngày nếu có lỗi từ nhà sản xuất. Vui lòng liên hệ hotline (028) 7300 1535 để được hỗ trợ.</p>
+              <p class="faq-answer">Có, sản phẩm được đổi trả trong vòng 7 ngày nếu có lỗi từ nhà sản xuất. Vui lòng liên hệ hotline {site.sales.display} để được hỗ trợ.</p>
             </div>
           </div>
 

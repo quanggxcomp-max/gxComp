@@ -1,11 +1,8 @@
 ---
 // SalesConsultant — blue sidebar widget with staff contact list
-const staff = [
-  { name: 'Ms. Vị',   phone: '0911 650 084' },
-  { name: 'Ms. Nhung', phone: '0918 801 771' },
-  { name: 'Ms. Vân',  phone: '0914 801 001' },
-  { name: 'Ms. Linh', phone: '0918 489 013' },
-];
+import { getSalesConsultants } from '../lib/contentful/queries';
+
+const staff = await getSalesConsultants();
 ---
 
 <div class="consultant-widget">
