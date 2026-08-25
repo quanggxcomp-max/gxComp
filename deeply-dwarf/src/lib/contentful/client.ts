@@ -1,41 +1,34 @@
 import { createClient } from 'contentful';
+import type { ContentfulClientApi } from 'contentful';
 
-const LOCALE_CANDIDATES = ['vi-VN', 'en-US'] as const;
+// ── Singleton client ─────────────────────────────────────────────────────────
+let _client: ContentfulClientApi<any> | null = null;
 
-let resolvedLocale: string | null = null;
-
-export function getContentfulClient() {
-  const space = import.meta.env.CONTENTFUL_SPACE_ID;
-  const accessToken = import.meta.env.CONTENTFUL_ACCESS_TOKEN;
-  const environment = import.meta.env.CONTENTFUL_ENVIRONMENT ?? 'master';
-
-  if (!space || !accessToken) {
-    throw new Error(
-      'Missing Contentful credentials. Add CONTENTFUL_SPACE_ID and CONTENTFUL_ACCESS_TOKEN to deeply-dwarf/.env'
-    );
-  }
-
-  return createClient({ space, accessToken, environment });
-}
-
-export async function getContentfulLocale(): Promise<string> {
-  if (resolvedLocale) return resolvedLocale;
-
-  const client = getContentfulClient();
-
-  for (const locale of LOCALE_CANDIDATES) {
-    const probe = await client.getEntries({
-      content_type: 'category',
-      locale,
-      limit: 1,
+export function getContentfulClient(): ContentfulClientApi<any> {
+  if (!_client) {
+    _client = createClient({
+      space:       import.meta.env.CONTENTFUL_SPACE_ID,
+      accessToken: import.meta.env.CONTENTFUL_ACCESS_TOKEN,
+      environment: import.meta.env.CONTENTFUL_ENVIRONMENT ?? 'master',
     });
-
-    if (probe.total > 0) {
-      resolvedLocale = locale;
-      return locale;
-    }
   }
-
-  resolvedLocale = LOCALE_CANDIDATES[0];
-  return resolvedLocale;
+  return _client;
 }
+
+/** Trả về locale ưu tiên: vi-VN nếu space có, fallback en-US */
+let _locale: string | null = null;
+export async function getContentfulLocale(): Promise<string> {
+  if (_locale) return _locale;
+  try {
+    const client = getContentfulClient();
+    const res = await client.getLocales();
+    const viVN = res.items.find(l => l.code === 'vi-VN');
+    _locale = viVN ? 'vi-VN' : 'en-US';
+  } catch {
+    _locale = 'en-US';
+  }
+  return _locale;
+}
+
+// ── Named re-export for convenience ─────────────────────────────────────────
+export const contentfulClient = getContentfulClient();
