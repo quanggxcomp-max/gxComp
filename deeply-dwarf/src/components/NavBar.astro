@@ -1,48 +1,24 @@
 ---
-// NavBar component — blue navigation bar with product categories
+import { getCategoryNavItems } from '../lib/contentful/queries';
+
+const categories = await getCategoryNavItems();
 ---
 
 <nav class="navbar">
   <div class="container">
     <ul class="navbar__list">
-      <li class="navbar__item">
-        <a href="/danh-muc/camera-quan-sat" class="navbar__link">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="flex-shrink:0">
-            <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
-          </svg>
-          Camera Quan Sát
-        </a>
-      </li>
-      <li class="navbar__item">
-        <a href="/danh-muc/mang-may-tinh" class="navbar__link">Mạng Máy Tính</a>
-      </li>
-      <li class="navbar__item">
-        <a href="/danh-muc/thiet-bi-vien-thong" class="navbar__link">Thiết Bị Viễn Thông</a>
-      </li>
-      <li class="navbar__item">
-        <a href="/danh-muc/access-control" class="navbar__link">Access Control</a>
-      </li>
-      <li class="navbar__item">
-        <a href="/danh-muc/thiet-bi-bao-dong" class="navbar__link">Thiết Bị Báo Động</a>
-      </li>
-      <li class="navbar__item">
-        <a href="/danh-muc/thiet-bi-am-thanh" class="navbar__link">Thiết Bị Âm Thanh</a>
-      </li>
-      <li class="navbar__item">
-        <a href="/danh-muc/thiet-bi-van-phong" class="navbar__link">Thiết Bị Văn Phòng</a>
-      </li>
-      <li class="navbar__item">
-        <a href="/danh-muc/thiet-bi-ban-hang" class="navbar__link">Thiết Bị Bán Hàng</a>
-      </li>
-      <li class="navbar__item">
-        <a href="/danh-muc/may-dinh-vi-do" class="navbar__link">Máy Định Vị &amp; Đo</a>
-      </li>
-      <li class="navbar__item">
-        <a href="/danh-muc/smart-devices" class="navbar__link">Smart Devices</a>
-      </li>
-      <li class="navbar__item">
-        <a href="/danh-muc/vat-tu-thiet-bi-dien" class="navbar__link">Vật tư &amp; TB Điện</a>
-      </li>
+      {categories.map((category, index) => (
+        <li class="navbar__item">
+          <a href={`/danh-muc/${category.slug}`} class="navbar__link">
+            {index === 0 && (
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="flex-shrink:0">
+                <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
+              </svg>
+            )}
+            {category.label}
+          </a>
+        </li>
+      ))}
       <li class="navbar__item">
         <a href="#" class="navbar__link navbar__link--more">
           Xem thêm ▼

@@ -7,140 +7,17 @@ import HeroSection from '../components/HeroSection.astro';
 import ProductSection from '../components/ProductSection.astro';
 import SalesConsultant from '../components/SalesConsultant.astro';
 import Footer from '../components/Footer.astro';
+import {
+  getCategoryNavItems,
+  getProductsByFlag,
+} from '../lib/contentful/queries';
 
-// ── Bestseller products ────────────────────────────────────────────────────
-const bestsellerProducts = [
-  {
-    slug: '4-port-ge-poe-switch-ruijie-rg-es207gs-p',
-    name: '4-Port GE PoE Switch RUIJIE RG-ES207GS-P',
-    code: '03387812',
-    price: '1.400.000 ₫',
-    image: 'https://placehold.co/200x160?text=RG-ES207GS-P',
-  },
-  {
-    slug: '4-port-ge-poe-switch-ruijie-rg-es207gs-lp',
-    name: '4-Port GE PoE Switch RUIJIE RG-ES207GS-LP',
-    code: '72423584',
-    price: '1.250.000 ₫',
-    image: 'https://placehold.co/200x160?text=RG-ES207GS-LP',
-  },
-  {
-    slug: 'nguon-luu-dien-ups-sorotec-bl1200-lcd',
-    name: 'Nguồn lưu điện UPS SOROTEC BL1200 LCD',
-    code: '13738294',
-    price: '2.650.000 ₫',
-    image: 'https://placehold.co/200x160?text=UPS+BL1200',
-  },
-  {
-    slug: 'nguon-luu-dien-ups-sorotec-bl1000-lcd',
-    name: 'Nguồn lưu điện UPS SOROTEC BL1000 LCD',
-    code: '61380847',
-    price: '2.580.000 ₫',
-    image: 'https://placehold.co/200x160?text=UPS+BL1000',
-  },
-  {
-    slug: '16-port-ge-poe-switch-ruijie-rg-es220gs-p-v2',
-    name: '16-Port GE PoE Switch RUIJIE RG-ES220GS-P-V2',
-    code: '97335756',
-    price: '4.650.000 ₫',
-    originalPrice: '5.810.000 ₫',
-    discount: 20,
-    image: 'https://placehold.co/200x160?text=RG-ES220GS-P',
-  },
-];
-
-// ── New products ──────────────────────────────────────────────────────────
-const newProducts = [
-  {
-    slug: 'camera-ip-8mp-hikvision-ds-2cd2083g2-iu',
-    name: 'Camera IP 8MP HIKVISION DS-2CD2083G2-IU',
-    code: '55871234',
-    price: '2.850.000 ₫',
-    image: 'https://placehold.co/200x160?text=Camera+8MP',
-  },
-  {
-    slug: 'bo-phat-wifi-6-tp-link-eap670-ax3000',
-    name: 'Bộ phát WiFi 6 TP-Link EAP670 AX3000',
-    code: '88342910',
-    price: '3.200.000 ₫',
-    image: 'https://placehold.co/200x160?text=WiFi+EAP670',
-  },
-  {
-    slug: 'switch-24-port-gigabit-ruijie-rg-s1924g',
-    name: 'Switch 24-Port Gigabit RUIJIE RG-S1924G',
-    code: '44218763',
-    price: '1.850.000 ₫',
-    image: 'https://placehold.co/200x160?text=Switch+24P',
-  },
-  {
-    slug: 'dau-ghi-hinh-ip-8-kenh-hikvision-ds-7608nxi-i2',
-    name: 'Đầu ghi hình IP 8 kênh HIKVISION DS-7608NXI-I2',
-    code: '23478901',
-    price: '4.100.000 ₫',
-    image: 'https://placehold.co/200x160?text=NVR+8CH',
-  },
-  {
-    slug: 'may-cham-cong-van-tay-hikvision-ds-k1t804bmf',
-    name: 'Máy chấm công vân tay HIKVISION DS-K1T804BMF',
-    code: '67932148',
-    price: '3.600.000 ₫',
-    image: 'https://placehold.co/200x160?text=Access+Ctrl',
-  },
-];
-
-// ── Sale / promotional products ───────────────────────────────────────────
-const saleProducts = [
-  {
-    slug: 'camera-ip-2mp-hikvision-ds-2cd1027g2h-liu',
-    name: 'Camera IP 2MP HIKVISION DS-2CD1027G2H-LIU',
-    code: '34959069',
-    price: '1.485.000 ₫',
-    originalPrice: '1.860.000 ₫',
-    discount: 20,
-    image: 'https://placehold.co/200x160?text=DS-2CD1027G2H',
-    promotion: 'Tặng thẻ nhớ 64GB',
-  },
-  {
-    slug: 'camera-ip-4mp-hikvision-ds-2cd1047g2h-liu',
-    name: 'Camera IP 4MP HIKVISION DS-2CD1047G2H-LIU',
-    code: '14541018',
-    price: '1.600.000 ₫',
-    originalPrice: '2.000.000 ₫',
-    discount: 20,
-    image: 'https://placehold.co/200x160?text=DS-2CD1047G2H',
-    promotion: 'Tặng thẻ nhớ 64GB',
-  },
-  {
-    slug: 'camera-ip-4mp-hikvision-ds-2cd1t47g2h-liu',
-    name: 'Camera IP 4MP HIKVISION DS-2CD1T47G2H-LIU',
-    code: '08533247',
-    price: '1.730.000 ₫',
-    originalPrice: '2.350.000 ₫',
-    discount: 20,
-    image: 'https://placehold.co/200x160?text=DS-2CD1T47G2H',
-    promotion: 'Tặng thẻ nhớ 64GB',
-  },
-  {
-    slug: 'camera-ip-2mp-hikvision-ds-2cd1327g2h-liu',
-    name: 'Camera IP 2MP HIKVISION DS-2CD1327G2H-LIU',
-    code: '71469016',
-    price: '1.580.000 ₫',
-    originalPrice: '1.975.000 ₫',
-    discount: 20,
-    image: 'https://placehold.co/200x160?text=DS-2CD1327G2H',
-    promotion: 'Tặng thẻ nhớ 64GB',
-  },
-  {
-    slug: 'may-chieu-epson-eb-x52',
-    name: 'Máy chiếu EPSON EB-X52',
-    code: '14833700',
-    price: '15.500.000 ₫',
-    originalPrice: '19.375.000 ₫',
-    discount: 20,
-    image: 'https://placehold.co/200x160?text=EPSON+EB-X52',
-    promotion: 'Tặng màn chiếu 100"',
-  },
-];
+const [bestsellerProducts, newProducts, saleProducts, categories] = await Promise.all([
+  getProductsByFlag('isBestseller'),
+  getProductsByFlag('isNew'),
+  getProductsByFlag('isSale'),
+  getCategoryNavItems(),
+]);
 ---
 
 <Layout title="Siêu Thị Viễn Thông - Camera, Mạng, Access Control - Giá Gốc">
@@ -193,16 +70,13 @@ const saleProducts = [
               DANH MỤC SẢN PHẨM
             </div>
             <ul class="quick-links-list">
-              <li><a href="#" class="quick-link">Camera Quan Sát</a></li>
-              <li><a href="#" class="quick-link">Mạng Máy Tính</a></li>
-              <li><a href="#" class="quick-link">Thiết Bị Viễn Thông</a></li>
-              <li><a href="#" class="quick-link">Access Control</a></li>
-              <li><a href="#" class="quick-link">Thiết Bị Báo Động</a></li>
-              <li><a href="#" class="quick-link">Thiết Bị Âm Thanh</a></li>
-              <li><a href="#" class="quick-link">Thiết Bị Văn Phòng</a></li>
-              <li><a href="#" class="quick-link">Thiết Bị Bán Hàng</a></li>
-              <li><a href="#" class="quick-link">Smart Devices</a></li>
-              <li><a href="#" class="quick-link">Vật tư &amp; Thiết bị Điện</a></li>
+              {categories.map((category) => (
+                <li>
+                  <a href={`/danh-muc/${category.slug}`} class="quick-link">
+                    {category.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </aside>
