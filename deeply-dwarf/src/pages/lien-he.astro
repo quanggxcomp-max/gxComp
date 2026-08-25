@@ -27,26 +27,20 @@ import Footer from '../components/Footer.astro';
           <h1 class="page-title">Gửi tin nhắn cho chúng tôi</h1>
           <p class="form-intro">Điền thông tin bên dưới, chúng tôi sẽ phản hồi trong vòng 24 giờ làm việc.</p>
 
-          <form class="contact-form" method="post" action="#">
+          <form class="contact-form" id="contactForm" method="post" action="#">
             <div class="form-group">
               <label for="name" class="form-label">Họ và tên <span class="required">*</span></label>
               <input type="text" id="name" name="name" class="form-input" placeholder="Nguyễn Văn A" required />
             </div>
 
-            <div class="form-row">
-              <div class="form-group">
-                <label for="email" class="form-label">Email <span class="required">*</span></label>
-                <input type="email" id="email" name="email" class="form-input" placeholder="example@email.com" required />
-              </div>
-              <div class="form-group">
-                <label for="phone" class="form-label">Số điện thoại <span class="required">*</span></label>
-                <input type="tel" id="phone" name="phone" class="form-input" placeholder="0901 234 567" required />
-              </div>
+            <div class="form-group">
+              <label for="phone" class="form-label">Số điện thoại <span class="required">*</span></label>
+              <input type="tel" id="phone" name="phone" class="form-input" placeholder="0901 234 567" required />
             </div>
 
             <div class="form-group">
-              <label for="subject" class="form-label">Tiêu đề</label>
-              <input type="text" id="subject" name="subject" class="form-input" placeholder="Tư vấn sản phẩm, hỗ trợ kỹ thuật..." />
+              <label for="email" class="form-label">Email <span class="required">*</span></label>
+              <input type="email" id="email" name="email" class="form-input" placeholder="example@email.com" required />
             </div>
 
             <div class="form-group">
@@ -56,7 +50,7 @@ import Footer from '../components/Footer.astro';
 
             <button type="submit" class="form-submit">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-              Gửi tin nhắn
+              GỬI
             </button>
           </form>
         </div>
@@ -133,6 +127,50 @@ import Footer from '../components/Footer.astro';
 
   <Footer />
 </Layout>
+
+<script>
+  // Thay URL này bằng Web app URL từ Google Apps Script của bạn
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxtUaCNtuYWn4vqXvaJPQ3MJHCCbTkOthz1x68EecLjlKUpCrGkxfVNXSnvKK0d1xJhuQ/exec';
+
+  document.getElementById('contactForm')?.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Đang gửi...';
+
+    const formData = new FormData(this);
+    const data = {
+      name: formData.get('name'),
+      phone: formData.get('phone'),
+      email: formData.get('email'),
+      message: formData.get('message'),
+      timestamp: new Date().toISOString()
+    };
+
+    try {
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      // Do no-cors, chúng ta không thể đọc response nhưng vẫn gửi được
+      alert('Thông tin đã được gửi thành công!');
+      this.reset();
+    } catch (error) {
+      console.error('Lỗi:', error);
+      alert('Có lỗi xảy ra khi gửi thông tin. Vui lòng thử lại.');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalText;
+    }
+  });
+</script>
 
 <style>
   .main-content { padding: 16px 0 24px; }

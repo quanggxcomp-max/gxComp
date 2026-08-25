@@ -7,6 +7,26 @@ const categories = await getCategoryNavItems();
 <nav class="navbar">
   <div class="container">
     <ul class="navbar__list">
+      <li class="navbar__item">
+        <a href="/gioi-thieu" class="navbar__link">
+          Giới thiệu
+        </a>
+      </li>
+      <li class="navbar__item">
+        <a href="/lien-he" class="navbar__link">
+          Liên hệ
+        </a>
+      </li>
+      <li class="navbar__item">
+        <a href="/so-do-duong-di" class="navbar__link">
+          Sơ đồ đường đi
+        </a>
+      </li>
+      <li class="navbar__item">
+        <a href="/chinh-sach" class="navbar__link">
+          Chính sách
+        </a>
+      </li>
       {categories.map((category, index) => (
         <li class="navbar__item">
           <a href={`/danh-muc/${category.slug}`} class="navbar__link">
