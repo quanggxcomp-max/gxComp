@@ -1,0 +1,135 @@
+---
+// NavBar component — blue navigation bar with product categories
+---
+
+<nav class="navbar">
+  <div class="container">
+    <ul class="navbar__list">
+      <li class="navbar__item">
+        <a href="/danh-muc/camera-quan-sat" class="navbar__link">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="flex-shrink:0">
+            <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
+          </svg>
+          Camera Quan Sát
+        </a>
+      </li>
+      <li class="navbar__item">
+        <a href="/danh-muc/mang-may-tinh" class="navbar__link">Mạng Máy Tính</a>
+      </li>
+      <li class="navbar__item">
+        <a href="/danh-muc/thiet-bi-vien-thong" class="navbar__link">Thiết Bị Viễn Thông</a>
+      </li>
+      <li class="navbar__item">
+        <a href="/danh-muc/access-control" class="navbar__link">Access Control</a>
+      </li>
+      <li class="navbar__item">
+        <a href="/danh-muc/thiet-bi-bao-dong" class="navbar__link">Thiết Bị Báo Động</a>
+      </li>
+      <li class="navbar__item">
+        <a href="/danh-muc/thiet-bi-am-thanh" class="navbar__link">Thiết Bị Âm Thanh</a>
+      </li>
+      <li class="navbar__item">
+        <a href="/danh-muc/thiet-bi-van-phong" class="navbar__link">Thiết Bị Văn Phòng</a>
+      </li>
+      <li class="navbar__item">
+        <a href="/danh-muc/thiet-bi-ban-hang" class="navbar__link">Thiết Bị Bán Hàng</a>
+      </li>
+      <li class="navbar__item">
+        <a href="/danh-muc/may-dinh-vi-do" class="navbar__link">Máy Định Vị &amp; Đo</a>
+      </li>
+      <li class="navbar__item">
+        <a href="/danh-muc/smart-devices" class="navbar__link">Smart Devices</a>
+      </li>
+      <li class="navbar__item">
+        <a href="/danh-muc/vat-tu-thiet-bi-dien" class="navbar__link">Vật tư &amp; TB Điện</a>
+      </li>
+      <li class="navbar__item">
+        <a href="#" class="navbar__link navbar__link--more">
+          Xem thêm ▼
+        </a>
+      </li>
+      <li class="navbar__item navbar__item--sale">
+        <a href="/#khuyen-mai" class="navbar__link navbar__link--sale">
+          🔥 Khuyến mãi
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .navbar {
+    background: var(--color-nav-bg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .navbar__list {
+    display: flex;
+    align-items: stretch;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .navbar__list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navbar__item {
+    flex-shrink: 0;
+  }
+
+  .navbar__link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--color-white);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 10px 11px;
+    white-space: nowrap;
+    transition: background 0.15s;
+    text-decoration: none;
+  }
+
+  .navbar__link:hover {
+    background: rgba(255,255,255,0.15);
+  }
+
+  .navbar__link--more {
+    color: #ffe566;
+    font-weight: 600;
+  }
+
+  .navbar__link--more:hover {
+    background: rgba(255,255,255,0.1);
+  }
+
+  .navbar__item--sale {
+    margin-left: auto;
+  }
+
+  .navbar__link--sale {
+    background: var(--color-red);
+    color: var(--color-white);
+    font-weight: 700;
+    padding: 10px 16px;
+  }
+
+  .navbar__link--sale:hover {
+    background: var(--color-red-dark);
+  }
+
+  @media (max-width: 768px) {
+    .navbar__link {
+      font-size: 0.75rem;
+      padding: 10px 8px;
+    }
+    .navbar__item--sale {
+      margin-left: 0;
+    }
+  }
+</style>

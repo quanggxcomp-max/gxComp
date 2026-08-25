@@ -1,0 +1,202 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TopBar from '../components/TopBar.astro';
+import Header from '../components/Header.astro';
+import NavBar from '../components/NavBar.astro';
+import SalesConsultant from '../components/SalesConsultant.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Sơ đồ đường đi - Siêu Thị Viễn Thông">
+  <TopBar />
+  <Header />
+  <NavBar />
+
+  <main class="main-content">
+    <div class="container">
+
+      <nav class="breadcrumb">
+        <a href="/">🏠 Trang chủ</a> ›
+        <span>Sơ đồ đường đi</span>
+      </nav>
+
+      <div class="page-layout">
+
+        <div class="page-main">
+          <div class="page-card">
+            <h1 class="page-title">Sơ đồ đường đi</h1>
+
+            <!-- Address info box -->
+            <div class="address-box">
+              <div class="address-box__icon">
+                <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor" style="color: var(--color-primary)">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+              </div>
+              <div class="address-box__content">
+                <h2 class="address-box__name">Siêu Thị Viễn Thông – Công ty CP Viễn Thông Á Châu</h2>
+                <p class="address-box__addr">92K Nguyễn Thái Sơn, Phường Hạnh Thông, Quận Gò Vấp, TP.HCM</p>
+                <div class="address-box__contacts">
+                  <span>
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+                    <a href="tel:02873001535">(028) 7300 1535</a>
+                  </span>
+                  <span>
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <a href="mailto:info@sieuthivienthong.com">info@sieuthivienthong.com</a>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Google Maps embed -->
+            <div class="map-container">
+              <iframe
+                src="https://maps.google.com/maps?q=92K+Nguyen+Thai+Son,+Hanh+Thong,+Go+Vap,+Ho+Chi+Minh+City&output=embed"
+                width="100%"
+                height="420"
+                style="border:0; border-radius: var(--radius-md);"
+                allowfullscreen
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Bản đồ vị trí Siêu Thị Viễn Thông"
+              ></iframe>
+            </div>
+
+            <!-- Directions -->
+            <h3 class="page-section-title">Hướng dẫn đường đến</h3>
+
+            <div class="directions-list">
+              <div class="direction-item">
+                <div class="direction-num">1</div>
+                <div class="direction-text">
+                  <strong>Từ trung tâm TP.HCM (Quận 1):</strong> Đi theo đường Đinh Tiên Hoàng → Phan Đăng Lưu → Phan Văn Trị → rẽ vào Nguyễn Thái Sơn. Công ty nằm tại số 92K bên phải đường.
+                </div>
+              </div>
+              <div class="direction-item">
+                <div class="direction-num">2</div>
+                <div class="direction-text">
+                  <strong>Từ sân bay Tân Sơn Nhất:</strong> Đi ra đường Hoàng Văn Thụ → Phan Đăng Lưu → Nguyễn Oanh → Nguyễn Thái Sơn. Khoảng cách khoảng 3km, di chuyển 10–15 phút.
+                </div>
+              </div>
+              <div class="direction-item">
+                <div class="direction-num">3</div>
+                <div class="direction-text">
+                  <strong>Bằng xe buýt:</strong> Tuyến xe buýt số 102 (Bến Thành – Gò Vấp) có trạm dừng gần đường Nguyễn Thái Sơn. Đi bộ khoảng 5 phút đến công ty.
+                </div>
+              </div>
+              <div class="direction-item">
+                <div class="direction-num">4</div>
+                <div class="direction-text">
+                  <strong>Bằng xe máy / ô tô:</strong> Có bãi đỗ xe miễn phí cho khách hàng đến giao dịch trực tiếp tại cửa hàng.
+                </div>
+              </div>
+            </div>
+
+            <h3 class="page-section-title">Giờ làm việc</h3>
+            <div class="hours-table">
+              <div class="hours-row">
+                <span class="hours-day">Thứ Hai – Thứ Sáu</span>
+                <span class="hours-time">07:30 – 17:30</span>
+              </div>
+              <div class="hours-row">
+                <span class="hours-day">Thứ Bảy</span>
+                <span class="hours-time">07:30 – 12:00</span>
+              </div>
+              <div class="hours-row hours-row--closed">
+                <span class="hours-day">Chủ Nhật</span>
+                <span class="hours-time">Nghỉ</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="page-sidebar">
+          <SalesConsultant />
+
+          <div class="contact-widget">
+            <div class="contact-widget__header">LIÊN HỆ VÀ HỖ TRỢ</div>
+            <div class="contact-widget__item">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+              <div>
+                <p class="contact-label">Liên hệ mua hàng</p>
+                <a href="tel:02873001535">(028) 7300 1535</a>
+              </div>
+            </div>
+            <div class="contact-widget__item">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+              <div>
+                <p class="contact-label">Hỗ trợ bảo hành</p>
+                <a href="tel:02873002049">(028) 7300 2049</a>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .main-content { padding: 16px 0 24px; }
+
+  .breadcrumb { font-size: 0.8rem; color: var(--color-text-muted); margin-bottom: 16px; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+  .breadcrumb a { color: var(--color-primary); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb span { color: var(--color-primary); font-weight: 500; }
+
+  .page-layout { display: flex; gap: 16px; align-items: flex-start; }
+  .page-main { flex: 1; min-width: 0; }
+  .page-sidebar { flex-shrink: 0; width: 240px; display: flex; flex-direction: column; gap: 14px; position: sticky; top: 50px; }
+
+  .page-card { background: white; border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 28px; }
+  .page-title { font-size: 1.4rem; font-weight: 700; color: var(--color-text); border-left: 4px solid var(--color-red); padding-left: 12px; margin-bottom: 20px; }
+  .page-section-title { font-size: 1rem; font-weight: 700; color: var(--color-primary); margin: 20px 0 8px; }
+  p { font-size: 0.88rem; line-height: 1.7; color: var(--color-text-light); margin-bottom: 10px; }
+
+  /* Address box */
+  .address-box { display: flex; gap: 16px; align-items: flex-start; background: #f0f6ff; border: 1px solid #c0daf0; border-radius: var(--radius-md); padding: 16px 20px; margin-bottom: 20px; }
+  .address-box__icon { flex-shrink: 0; margin-top: 4px; }
+  .address-box__name { font-size: 0.95rem; font-weight: 700; color: var(--color-text); margin-bottom: 4px; }
+  .address-box__addr { font-size: 0.85rem; color: var(--color-text-light); margin-bottom: 8px; }
+  .address-box__contacts { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.82rem; }
+  .address-box__contacts span { display: flex; align-items: center; gap: 5px; color: var(--color-text-light); }
+  .address-box__contacts svg { flex-shrink: 0; color: var(--color-primary); }
+  .address-box__contacts a { color: var(--color-primary); font-weight: 500; }
+
+  /* Map */
+  .map-container { margin-bottom: 20px; border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--color-border); }
+
+  /* Directions */
+  .directions-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 10px; }
+  .direction-item { display: flex; gap: 12px; align-items: flex-start; }
+  .direction-num { flex-shrink: 0; width: 28px; height: 28px; background: var(--color-primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; margin-top: 1px; }
+  .direction-text { font-size: 0.85rem; color: var(--color-text-light); line-height: 1.6; padding-top: 4px; }
+  .direction-text strong { color: var(--color-text); }
+
+  /* Hours table */
+  .hours-table { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; margin-top: 8px; }
+  .hours-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 16px; font-size: 0.85rem; border-bottom: 1px solid #f0f0f0; }
+  .hours-row:last-child { border-bottom: none; }
+  .hours-row:nth-child(even) { background: #f8f8f8; }
+  .hours-day { font-weight: 500; color: var(--color-text); }
+  .hours-time { color: var(--color-primary); font-weight: 600; }
+  .hours-row--closed .hours-time { color: var(--color-text-muted); }
+
+  /* Contact widget */
+  .contact-widget { background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; }
+  .contact-widget__header { background: var(--color-primary); color: white; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; padding: 10px 14px; letter-spacing: 0.04em; }
+  .contact-widget__item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border-bottom: 1px solid #f0f0f0; }
+  .contact-widget__item svg { flex-shrink: 0; color: var(--color-primary); margin-top: 2px; }
+  .contact-widget__item a { color: var(--color-primary); font-weight: 600; font-size: 0.85rem; }
+  .contact-label { font-size: 0.75rem; color: var(--color-text-muted); margin-bottom: 2px; }
+
+  @media (max-width: 768px) {
+    .page-layout { flex-direction: column; }
+    .page-sidebar { width: 100%; position: static; }
+    .address-box { flex-direction: column; gap: 10px; }
+  }
+</style>

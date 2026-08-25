@@ -1,0 +1,51 @@
+---
+import ProductCard from './ProductCard.astro';
+
+interface Product {
+  name: string;
+  code: string;
+  price: string;
+  originalPrice?: string;
+  discount?: number;
+  image: string;
+  promotion?: string;
+  slug?: string;
+}
+
+interface Props {
+  title: string;
+  products: Product[];
+  showViewMore?: boolean;
+  viewMoreUrl?: string;
+  id?: string;
+}
+
+const { title, products, showViewMore = false, viewMoreUrl = '#', id } = Astro.props;
+---
+
+<section class="product-section" id={id}>
+  <h2 class="section-title">{title}</h2>
+
+  <div class="product-grid">
+    {products.map((product) => (
+      <ProductCard
+        name={product.name}
+        code={product.code}
+        price={product.price}
+        originalPrice={product.originalPrice}
+        discount={product.discount}
+        image={product.image}
+        promotion={product.promotion}
+        slug={product.slug}
+      />
+    ))}
+  </div>
+
+  {showViewMore && (
+    <div class="view-more">
+      <a href={viewMoreUrl}>
+        Xem thêm ▼
+      </a>
+    </div>
+  )}
+</section>

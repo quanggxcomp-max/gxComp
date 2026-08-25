@@ -1,0 +1,73 @@
+---
+interface Props {
+  name: string;
+  code: string;
+  price: string;
+  originalPrice?: string;
+  discount?: number;
+  image: string;
+  promotion?: string;
+  slug?: string;
+}
+
+const { name, code, price, originalPrice, discount, image, promotion, slug: slugProp } = Astro.props;
+
+const slug = slugProp ?? name.toLowerCase()
+  .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  .replace(/đ/g, 'd').replace(/[^a-z0-9\s-]/g, '')
+  .trim().replace(/\s+/g, '-');
+---
+
+<article class="product-card">
+  {discount && (
+    <div class="product-card__badge">
+      <span class="badge-sale">-{discount}%</span>
+    </div>
+  )}
+
+  <a href={`/san-pham/${slug}`} class="product-card__image-link">
+    <div class="product-card__image">
+      <img src={image} alt={name} loading="lazy" width="200" height="150" />
+    </div>
+  </a>
+
+  <div class="product-card__body">
+    <a href={`/san-pham/${slug}`} class="product-card__name-link">
+      <h3 class="product-card__name">{name}</h3>
+    </a>
+
+    <p class="product-card__code">Mã SP: {code}</p>
+
+    <div class="product-card__price-block">
+      <div class="product-card__price-row">
+        <span class="product-card__price">{price}</span>
+        {originalPrice && (
+          <span class="product-card__original-price">{originalPrice}</span>
+        )}
+      </div>
+      {promotion && (
+        <p class="product-card__promotion">{promotion}</p>
+      )}
+    </div>
+  </div>
+</article>
+
+<style>
+  .product-card__image-link,
+  .product-card__name-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .product-card__price-row {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+
+  .product-card__name:hover {
+    color: var(--color-primary);
+  }
+</style>
