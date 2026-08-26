@@ -2,8 +2,8 @@
 export const site = {
   brandName: 'GX Công Nghệ',
   companyName: 'Công ty Cổ phần Viễn Thông Á Châu',
-  website: 'sieuthivienthong.com',
-  address: '92K Nguyễn Thái Sơn, P.Hạnh Thông, Q.Gò Vấp, TP.HCM',
+  website: 'gxcompany.com',
+  address: 'Ngõ 51 Lương Khánh Thiện - Hoàng Mai - Hà Nội',
   addressShort: '92K Nguyễn Thái Sơn - Phường Hạnh Thông - Tp.HCM',
 
   sales: {
@@ -18,9 +18,9 @@ export const site = {
   },
   support: {
     label: 'Chăm sóc khách hàng',
-    email: 'cskh@sieuthivienthong.com',
+    email: 'cskh@gxcompany.com',
   },
-  infoEmail: 'info@sieuthivienthong.com',
+  infoEmail: 'info@gxcompany.com',
 
   contactWidgetTitle: 'LIÊN HỆ VÀ HỖ TRỢ',
 } as const;
