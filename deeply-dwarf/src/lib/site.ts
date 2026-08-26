@@ -4,7 +4,7 @@ export const site = {
   companyName: 'Công ty Cổ phần Viễn Thông Á Châu',
   website: 'gxcompany.com',
   address: 'Ngõ 51 Lương Khánh Thiện - Hoàng Mai - Hà Nội',
-  addressShort: '92K Nguyễn Thái Sơn - Phường Hạnh Thông - Tp.HCM',
+  addressShort: 'Ngõ 51 Lương Khánh Thiện - Hoàng Mai - Hà Nội',
 
   sales: {
     label: 'Liên hệ mua hàng',
