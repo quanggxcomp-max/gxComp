@@ -2,29 +2,22 @@
 import { getCategoryNavItems } from '../lib/contentful/queries';
 
 const categories = await getCategoryNavItems();
-
-// Nhóm categories VDS theo slug prefix
-const vdsCategories = categories.filter(c =>
-  ['cong-truot-tu-dong','cong-mo-tu-dong','barrier-tu-dong',
-   'cua-cuon-tu-dong','cua-garage-tu-dong','phu-kien-dieu-khien-vds'].includes(c.slug)
-);
-const otherCategories = categories.filter(c => !vdsCategories.find(v => v.slug === c.slug));
 ---
 
 <nav class="navbar">
   <div class="container">
     <ul class="navbar__list">
 
-      <!-- Tự Động Hóa VDS — dropdown -->
+      <!-- Danh mục sản phẩm — dropdown tất cả categories -->
       <li class="navbar__item navbar__item--dropdown">
         <a href="#" class="navbar__link navbar__link--group">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="flex-shrink:0">
-            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/>
+            <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
           </svg>
-          Tự Động Hóa VDS ▾
+          Danh mục ▾
         </a>
         <ul class="navbar__dropdown">
-          {vdsCategories.map(cat => (
+          {categories.map(cat => (
             <li>
               <a href={`/danh-muc/${cat.slug}`} class="navbar__dropdown-link">
                 {cat.label}
@@ -33,15 +26,6 @@ const otherCategories = categories.filter(c => !vdsCategories.find(v => v.slug =
           ))}
         </ul>
       </li>
-
-      <!-- Các categories khác từ Contentful -->
-      {otherCategories.map(cat => (
-        <li class="navbar__item">
-          <a href={`/danh-muc/${cat.slug}`} class="navbar__link">
-            {cat.label}
-          </a>
-        </li>
-      ))}
 
       <!-- Lắp Đặt -->
       <li class="navbar__item">
