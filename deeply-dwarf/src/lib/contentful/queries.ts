@@ -102,10 +102,12 @@ async function fetchAllCategoryEntries() {
 
 export async function getCategoryNavItems(): Promise<CategoryNavItem[]> {
   const categories = await fetchAllCategoryEntries();
-  return categories.map((entry) => ({
-    slug: entry.fields.slug,
-    label: entry.fields.label,
-  }));
+  return categories
+    .map((entry) => ({
+      slug:  entry.fields.slug  as string,
+      label: entry.fields.label as string,
+    }))
+    .filter(c => c.slug && c.label); // lọc bỏ entries lỗi
 }
 
 export async function getProductsByFlag(

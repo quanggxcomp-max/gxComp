@@ -45,25 +45,32 @@ export function mapProductEntry(
   imageSize = '200x160'
 ): ProductCardData {
   const fields = entry.fields;
-  const category = fields.category;
+
+  // category có thể là Link chưa resolve hoặc Entry đã resolve
+  const category = fields.category as any;
   const categoryFields = category?.fields as CategoryFields | undefined;
+  const categoryLabel = categoryFields?.label as string | undefined;
+  const categorySlug  = categoryFields?.slug  as string | undefined;
+
+  // price đảm bảo luôn có giá trị
+  const rawPrice = (fields.price as string) ?? 'Liên hệ';
 
   return {
-    slug: fields.slug,
-    name: fields.name,
-    code: fields.code,
-    price: formatPrice(fields.price),
-    originalPrice: fields.originalPrice ? formatPrice(fields.originalPrice) : undefined,
-    discount: fields.discount,
-    promotion: fields.promotion,
-    brand: fields.brand,
-    warranty: fields.warranty,
-    category: categoryFields?.label,
-    categorySlug: categoryFields?.slug,
-    isBestseller: fields.isBestseller ?? false,
-    isNew: fields.isNew ?? false,
-    isSale: fields.isSale ?? false,
-    image: productPlaceholderImage(fields.name, imageSize),
+    slug:          fields.slug  as string,
+    name:          fields.name  as string,
+    code:          fields.code  as string,
+    price:         formatPrice(rawPrice),
+    originalPrice: fields.originalPrice ? formatPrice(fields.originalPrice as string) : undefined,
+    discount:      fields.discount      as number | undefined,
+    promotion:     fields.promotion     as string | undefined,
+    brand:         fields.brand         as string | undefined,
+    warranty:      fields.warranty      as string | undefined,
+    category:      categoryLabel,
+    categorySlug:  categorySlug,
+    isBestseller:  (fields.isBestseller as boolean) ?? false,
+    isNew:         (fields.isNew        as boolean) ?? false,
+    isSale:        (fields.isSale       as boolean) ?? false,
+    image:         productPlaceholderImage(fields.name as string, imageSize),
   };
 }
 

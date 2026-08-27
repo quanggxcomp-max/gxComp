@@ -15,19 +15,9 @@ export function getContentfulClient(): ContentfulClientApi<any> {
   return _client;
 }
 
-/** Trả về locale ưu tiên: vi-VN nếu space có, fallback en-US */
-let _locale: string | null = null;
+/** Locale cố định vi-VN — space đã được cấu hình với locale này */
 export async function getContentfulLocale(): Promise<string> {
-  if (_locale) return _locale;
-  try {
-    const client = getContentfulClient();
-    const res = await client.getLocales();
-    const viVN = res.items.find(l => l.code === 'vi-VN');
-    _locale = viVN ? 'vi-VN' : 'en-US';
-  } catch {
-    _locale = 'en-US';
-  }
-  return _locale;
+  return 'vi-VN';
 }
 
 // ── Named re-export for convenience ─────────────────────────────────────────
