@@ -1,5 +1,6 @@
 ---
 import ContactSupport from './ContactSupport.astro';
+import { site } from '../lib/site';
 ---
 
 <section class="hero">
@@ -15,8 +16,8 @@ import ContactSupport from './ContactSupport.astro';
       <div class="hero__banner">
         <div class="hero__banner-content">
           <div class="hero__banner-text">
-            <p class="hero__banner-subtitle">ĐỐI TÁC TIN CẬY CHO GIẢI PHÁP AN NINH &amp; VIỄN THÔNG TOÀN DIỆN</p>
-            <h1 class="hero__banner-title">CÔNG TY CỔ PHẦN<br/>VIỄN THÔNG Á CHÂU</h1>
+            <p class="hero__banner-subtitle">ĐỐI TÁC TIN CẬY — PHÂN PHỐI THIẾT BỊ TỰ ĐỘNG HÓA VDS ITALY</p>
+            <h1 class="hero__banner-title">{site.brandName}</h1>
             <div class="hero__banner-meta">
               <span class="hero__banner-meta-item">
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
@@ -24,13 +25,13 @@ import ContactSupport from './ContactSupport.astro';
                   <line x1="2" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="1.5"/>
                   <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="currentColor" stroke-width="1.5" fill="none"/>
                 </svg>
-                sieuthivienthong.com
+                {site.website}
               </span>
               <span class="hero__banner-meta-item">
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                 </svg>
-                92K Nguyễn Thái Sơn - P.Hạnh Thông - Tp.HCM
+                {site.addressShort}
               </span>
             </div>
 
