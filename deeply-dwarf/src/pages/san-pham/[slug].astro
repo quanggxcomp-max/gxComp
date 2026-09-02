@@ -6,7 +6,6 @@ import NavBar from '../../components/NavBar.astro';
 import SalesConsultant from '../../components/SalesConsultant.astro';
 import Footer from '../../components/Footer.astro';
 import { getAllProductsForPages } from '../../lib/contentful/queries';
-import { productPlaceholderImage } from '../../lib/contentful/mappers';
 import type { ProductCardData } from '../../lib/contentful/types';
 import { site } from '../../lib/site';
 
@@ -15,7 +14,7 @@ export async function getStaticPaths() {
   return allProducts.map((product) => ({
     params: { slug: product.slug },
     props: {
-      product: { ...product, image: productPlaceholderImage(product.name, '400x300') },
+      product,
       allProducts,
     },
   }));

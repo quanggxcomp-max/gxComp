@@ -45,6 +45,7 @@ const PRODUCT_SELECT = [
   'fields.isBestseller',
   'fields.isNew',
   'fields.isSale',
+  'fields.image',
   'fields.category',
   'sys.id',
 ].join(',');

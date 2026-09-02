@@ -1,4 +1,4 @@
-import type { Entry, EntrySkeletonType } from 'contentful';
+import type { Asset, Entry, EntrySkeletonType } from 'contentful';
 import type { CategoryPageData, ProductCardData, SalesConsultantData } from './types';
 
 type CategoryFields = {
@@ -21,6 +21,7 @@ type ProductFields = {
   isBestseller?: boolean;
   isNew?: boolean;
   isSale?: boolean;
+  image?: Asset;
   category?: Entry<EntrySkeletonType & { fields: CategoryFields }>;
 };
 
@@ -38,6 +39,12 @@ export function formatPrice(price: string): string {
 export function productPlaceholderImage(name: string, size = '200x160'): string {
   const label = encodeURIComponent(name.slice(0, 24));
   return `https://placehold.co/${size}?text=${label}`;
+}
+
+function resolveAssetUrl(asset?: Asset): string | undefined {
+  const url = asset?.fields?.file?.url;
+  if (!url) return undefined;
+  return url.startsWith('//') ? `https:${url}` : url;
 }
 
 export function mapProductEntry(
@@ -70,7 +77,7 @@ export function mapProductEntry(
     isBestseller:  (fields.isBestseller as boolean) ?? false,
     isNew:         (fields.isNew        as boolean) ?? false,
     isSale:        (fields.isSale       as boolean) ?? false,
-    image:         productPlaceholderImage(fields.name as string, imageSize),
+    image:         resolveAssetUrl(fields.image) ?? productPlaceholderImage(fields.name as string, imageSize),
   };
 }
 
